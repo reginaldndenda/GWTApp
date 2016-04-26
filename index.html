@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>The Global Work & Travel Co</title>
+    <!-- Style sheets -->
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.2.min.js" integrity="sha256-TZWGoHXwgqBP1AF4SZxHIBKzUdtMGk0hCQegiR99itk=" crossorigin="anonymous"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="app/require.js"></script>
+    <script src="routes/details.js"></script>
+    <script src="https://rawgithub.com/cletourneau/angular-bootstrap-datepicker/master/dist/angular-bootstrap-datepicker.js" charset="utf-8"></script>
+    <script src="app/app.js"></script>
+</head>
+<body ng-app="Details">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">The Global Work & Travel Co</div>
+            </div>
+        </div>
+    </nav>
+    <!---Main form to enter details-->
+    <form id="formfield" method="post" enctype="multipart/form-data" >
+        <input type="hidden" name="action" value="add_form" />
+        <div class="row" style="margin-left:50px">
+            <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="name">First Name</label>
+                <input type="text" class="form-control" id="inputfname" name="inputfname" ng-model="inputfname" ng-pattern="/^([A-Z Ñ0-9]{0,60})$/i" required />
+            </div>
+        </div>
+        <div class="row" style="margin-left:50px">
+            <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="name">Last Name</label>
+                <input type="text" class="form-control" id="inputlname" name="inputlname" ng-model="inputlname" ng-pattern="/^([A-Z Ñ0-9]{0,60})$/i" required />
+            </div>
+        </div>
+        <div class="row" style="margin-left:50px">
+            <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="name">Age</label>
+                <input type="text" class="form-control" id="inputage" name="inputage" ng-model="inputage" ng-pattern="/^([A-Z Ñ0-9]{0,60})$/i" required />
+            </div>
+        </div>
+        <div class="row" style="margin-left:50px">
+            <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="inputemail">Email</label>
+                <input type="text" class="form-control" id="inputEmail" name="inputEmail" ng-model="inputemail" ng-pattern="/^([A-Z Ñ0-9]{0,60})$/i" required />
+            </div>
+        </div>
+        <div class="row" style="margin-left:50px">
+            <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="inputcountry">Country</label>
+                <select name="inputcountry" id="inputcountry" ng-model="inputcountry" class="form-control">
+                    <option>Please Select</option>
+                    <option>Australia</option>
+                    <option>Canada, </option>
+                    <option>United Kingdom</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="margin-left:50px">
+            <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="name">Phone</label>
+                <input type="text" class="form-control" id="inputPhone" name="inputPhone" ng-model="inputphone" ng-pattern="/^([A-Z Ñ0-9]{0,60})$/i" required />
+            </div>
+        </div>
+        <div class="row" style="margin-left:50px">
+           <div class="form-group col-md-5" show-errors>
+                <label class="control-label" for="name">Date</label>
+                <input type="text" class="form-control" id="inputDate" name="inputDate" ng-model="inputdate" ng-pattern="/^([A-Z Ñ0-9]{0,60})$/i" required />
+            </div>
+
+            </div>
+
+       
+        <div class="row">
+            <div class="form-group" style="margin-left:50px">
+                <div class="col-md-2">
+                    <input type="button" name="btn" value="Review and Submit" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-default" />
+                </div>
+                <div class="col-md-2">
+                    <a href="app/details/detailListView.html" class="btn btn-info" role="button">View Details</a>
+                </div>
+        </div>
+     </form>
+    <!---modal form to review values entered-->
+    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Confirm Submit
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to submit the following details?
+                    <table class="table">
+                        <tr>
+                            <th>First Name</th>
+                            <td> {{inputfname}}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name</th>
+                            <td> {{inputlname}}</td>
+                        </tr>
+                        <tr>
+                            <th>Age</th>
+                            <td> {{inputage}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td> {{inputemail}}</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td> {{inputcountry}}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td> {{inputphone}}</td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td> {{inputdate}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" ng-click="modal.saved=true;"> Submit </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
+
+
+

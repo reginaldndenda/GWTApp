@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>The Global Work & Travel Co</title>
+    <!-- Style sheets -->
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="../require.js"></script>
+    <script src="../../Scripts/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.0.2.min.js" integrity="sha256-TZWGoHXwgqBP1AF4SZxHIBKzUdtMGk0hCQegiR99itk=" crossorigin="anonymous"></script>
+    <script src="../../routes/details.js"></script>
+</head>
+<body>
+<div ng-app="myApp" class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-6" ng-controller="tableController">
+            <h3>Detail List</h3>
+            <div style="margin-bottom: 20px">
+                <label class="checkbox-inline" ng-repeat="$column in table.boundCols">
+                    <input type="checkbox" ng-checked="$column.sortable()"
+                           ng-click="table.toggleSortability($column)" /> {{$column.title()}}
+                </label>
+            </div>
+            <table ng-table="table.tableParams" class="table table-condensed table-bordered table-striped"
+                   ng-table-columns-binding="table.boundCols">
+                <!-- assigning widths prevent columns size changing when sortability is toggled -->
+                <colgroup>
+                    <col width="33.33%" />
+                    <col width="33.33%" />
+                    <col width="33.33%" />
+                </colgroup>
+                <tr ng-repeat="row in $data">
+                    <td data-title="'First Name'" sortable="'Name'">{{row.Firstname}}</td>
+                    <td data-title="'Last Name'" filter="'Name'">{{row.LastName}}</td>
+                    <td data-title="'Age'" filter="{age: 'number'}">{{row.Age}}</td>
+                    <td data-title="'Email'">{{row.Email}}</td>
+                    <td data-title="'Country'" filter="{ country: 'select'}" filter-data="table.countries">{{row.country}}</td>
+                    <td data-title="'Phone'">{{row.Phone}}</td>
+                    <td data-title="'Date'" sortable="'Date'">{{row.Date}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
